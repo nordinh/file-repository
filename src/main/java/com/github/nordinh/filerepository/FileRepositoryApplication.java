@@ -22,8 +22,6 @@ public class FileRepositoryApplication extends Application<FileRepositoryConfigu
 
 	@Override
 	public void initialize(Bootstrap<FileRepositoryConfiguration> bootstrap) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
