@@ -5,7 +5,7 @@ File repository implementation powered by MongoDB GridFS and accessible through 
 
 Starting application
 --------------------
-Running `mvn clean install` on the project will result in a fat jar being created. Running `java -jar target/file-repository-0.0.1-SNAPSHOT server config.yml` will boot the application. As an alternative you can also run the `com.github.nordinh.filerepository.FileRepositoryApplication` main method. The application will by default run on port 8181, admin access (metrics, ...) on port 8182.
+Running `mvn clean install` on the project will result in a fat jar being created. Running `java -jar target/file-repository-0.0.1-SNAPSHOT server config.yml` will boot the application. As an alternative you can also run the `com.github.nordinh.filerepository.FileRepositoryApplication` main method. The application will by default run on port 8181, admin access (metrics, ...) on port 8182. You will need a running MongoDB instance on your local machine accessible on port 27017. See `config.yml` for details.
 
 Buckets
 -------
