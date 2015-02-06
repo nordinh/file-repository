@@ -1,0 +1,100 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "v1",
+    "title" : "File repository API documentation"
+  },
+  "host" : "localhost",
+  "basePath" : "/",
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/{bucket}" : {
+      "post" : {
+        "tags" : [ "{bucket}" ],
+        "summary" : "Store a file in the repository",
+        "description" : "Stores a file sent using multipart form data into the bucket. Files are identified by their file name. If a file with the same name already exists it will get replaced.",
+        "operationId" : "storeFile",
+        "consumes" : [ "multipart/form-data" ],
+        "parameters" : [ {
+          "name" : "bucket",
+          "in" : "path",
+          "description" : "The bucket in which to store the file",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "file",
+          "in" : "formData",
+          "description" : "The (binary) file to be stored",
+          "required" : false,
+          "type" : "file"
+        }, {
+          "name" : "file",
+          "in" : "formData",
+          "description" : "The file content disposition header containing the file name",
+          "required" : false,
+          "type" : "ref"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "The file has been stored and is accessible on the given location"
+          }
+        }
+      }
+    },
+    "/{bucket}/{fileName}" : {
+      "get" : {
+        "tags" : [ "{bucket}" ],
+        "summary" : "Read a file from the repository",
+        "description" : "Reads the file identified by the given file name from the bucket. Returns a binary stream.",
+        "operationId" : "readFile",
+        "produces" : [ "application/octet-stream" ],
+        "parameters" : [ {
+          "name" : "bucket",
+          "in" : "path",
+          "description" : "The bucket from which to read the file",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "fileName",
+          "in" : "path",
+          "description" : "The file name of the file to be retrieved",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "File was found"
+          },
+          "500" : {
+            "description" : "File was not found"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "{bucket}" ],
+        "summary" : "Delete a file from the repository",
+        "description" : "Deletes the file identified by the given file name from the bucket. If the file does not exist nothing happens.",
+        "operationId" : "deleteFile",
+        "parameters" : [ {
+          "name" : "bucket",
+          "in" : "path",
+          "description" : "The bucket from which to delete the file",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "fileName",
+          "in" : "path",
+          "description" : "The file name of the file to be deleted",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "File deletion was successfull"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : { }
+}
