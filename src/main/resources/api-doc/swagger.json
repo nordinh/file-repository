@@ -10,7 +10,7 @@
   "paths" : {
     "/{bucket}" : {
       "post" : {
-        "tags" : [ "{bucket}" ],
+        "tags" : [ "File Store" ],
         "summary" : "Store a file in the repository",
         "description" : "Stores a file sent using multipart form data into the bucket. Files are identified by their file name. If a file with the same name already exists it will get replaced.",
         "operationId" : "storeFile",
@@ -30,7 +30,6 @@
         }, {
           "name" : "file",
           "in" : "formData",
-          "description" : "The file content disposition header containing the file name",
           "required" : false,
           "type" : "ref"
         } ],
@@ -43,7 +42,7 @@
     },
     "/{bucket}/{fileName}" : {
       "get" : {
-        "tags" : [ "{bucket}" ],
+        "tags" : [ "File Store" ],
         "summary" : "Read a file from the repository",
         "description" : "Reads the file identified by the given file name from the bucket. Returns a binary stream.",
         "operationId" : "readFile",
@@ -71,7 +70,7 @@
         }
       },
       "delete" : {
-        "tags" : [ "{bucket}" ],
+        "tags" : [ "File Store" ],
         "summary" : "Delete a file from the repository",
         "description" : "Deletes the file identified by the given file name from the bucket. If the file does not exist nothing happens.",
         "operationId" : "deleteFile",
