@@ -2,7 +2,7 @@
   "swagger" : "2.0",
   "info" : {
     "version" : "v1",
-    "title" : "File repository API documentation"
+    "title" : "File Store API documentation"
   },
   "host" : "localhost",
   "basePath" : "/",

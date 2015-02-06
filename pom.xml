@@ -98,7 +98,7 @@
 							<host>localhost</host>
 							<basePath>/</basePath>
 							<info>
-								<title>File repository API documentation</title>
+								<title>File Store API documentation</title>
 								<version>v1</version>
 							</info>
 							<swaggerDirectory>${basedir}/src/main/resources/api-doc</swaggerDirectory>
