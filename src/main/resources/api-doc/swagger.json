@@ -27,11 +27,6 @@
           "description" : "The (binary) file to be stored",
           "required" : false,
           "type" : "file"
-        }, {
-          "name" : "file",
-          "in" : "formData",
-          "required" : false,
-          "type" : "ref"
         } ],
         "responses" : {
           "201" : {
@@ -94,6 +89,5 @@
         }
       }
     }
-  },
-  "definitions" : { }
+  }
 }
