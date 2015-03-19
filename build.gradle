@@ -19,15 +19,18 @@ repositories {
 	mavenCentral()
 	jcenter()
 }
+
 dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version:dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-assets', version:dropwizardVersion
     compile group: 'com.commercehub.dropwizard', name: 'dropwizard-mongo', version:'2.0.0'
     compile group: 'org.glassfish.jersey.media', name: 'jersey-media-multipart', version:'2.16'
 }
+
 run {
     args 'server', 'config.yml'
 }
+
 task fatJar(type: Jar) {
 	manifest {
         attributes 'Implementation-Title': 'File repository',  
