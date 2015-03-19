@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+group = 'com.github.nordinh'
+version = '0.0.1-SNAPSHOT'
+
+description = """File Repository"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+mainClassName = "com.github.nordinh.filerepository.FileRepositoryApplication"
+
+project.ext {
+    dropwizardVersion = '0.8.0'
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+dependencies {
+    compile group: 'io.dropwizard', name: 'dropwizard-core', version:dropwizardVersion
+    compile group: 'io.dropwizard', name: 'dropwizard-assets', version:dropwizardVersion
+    compile group: 'com.commercehub.dropwizard', name: 'dropwizard-mongo', version:'2.0.0'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-multipart', version:'2.16'
+}
+run {
+    args 'server', 'config.yml'
+}
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'File repository',  
+        	'Implementation-Version': version,
+        	'Main-Class': mainClassName
+    }
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

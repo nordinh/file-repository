@@ -12,6 +12,7 @@ import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 
 import org.eclipse.jetty.servlets.CrossOriginFilter;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 import com.commercehub.dropwizard.mongo.ManagedMongoClient;
 import com.github.nordinh.filerepository.health.MongoHealthCheck;
@@ -38,6 +39,7 @@ public class FileRepositoryApplication extends Application<FileRepositoryConfigu
 	public void run(FileRepositoryConfiguration configuration, Environment environment) throws Exception {
 		DB db = configureMongoDB(configuration, environment);
 		configureCORS(environment);
+		environment.jersey().register(MultiPartFeature.class);
 		environment.jersey().register(new FileResource(db));
 	}
 
