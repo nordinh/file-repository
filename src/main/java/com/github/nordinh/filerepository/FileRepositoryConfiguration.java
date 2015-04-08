@@ -7,8 +7,9 @@ import javax.validation.constraints.NotNull;
 
 import com.commercehub.dropwizard.mongo.MongoClientFactory;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.nordinh.dropwizard.mongo.MongoConfiguration;
 
-public class FileRepositoryConfiguration extends Configuration {
+public class FileRepositoryConfiguration extends Configuration implements MongoConfiguration {
 
 	@Valid
 	@NotNull

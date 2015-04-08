@@ -18,12 +18,15 @@ project.ext {
 repositories {
 	mavenCentral()
 	jcenter()
+	maven {
+        url "https://github.com/nordinh/maven-repo/raw/master/"
+    }
 }
 
 dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version:dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-assets', version:dropwizardVersion
-    compile group: 'com.commercehub.dropwizard', name: 'dropwizard-mongo', version:'2.0.0'
+    compile group: 'com.github.nordinh', name: 'dropwizard-mongo-bundle', version: '0.0.1-SNAPSHOT'
     compile group: 'org.glassfish.jersey.media', name: 'jersey-media-multipart', version:'2.16'
 }
 

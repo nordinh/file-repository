@@ -15,11 +15,14 @@ import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 import com.commercehub.dropwizard.mongo.ManagedMongoClient;
+import com.github.nordinh.dropwizard.mongo.MongoBundle;
 import com.github.nordinh.filerepository.health.MongoHealthCheck;
 import com.github.nordinh.filerepository.resources.FileResource;
 import com.mongodb.DB;
 
 public class FileRepositoryApplication extends Application<FileRepositoryConfiguration> {
+
+	private MongoBundle mongoBundle;
 
 	public static void main(String[] args) throws Exception {
 		new FileRepositoryApplication().run(args);
@@ -32,24 +35,16 @@ public class FileRepositoryApplication extends Application<FileRepositoryConfigu
 
 	@Override
 	public void initialize(Bootstrap<FileRepositoryConfiguration> bootstrap) {
+		mongoBundle = new MongoBundle();
+		bootstrap.addBundle(mongoBundle);
 		bootstrap.addBundle(new AssetsBundle("/api-doc"));
 	}
 
 	@Override
 	public void run(FileRepositoryConfiguration configuration, Environment environment) throws Exception {
-		DB db = configureMongoDB(configuration, environment);
 		configureCORS(environment);
 		environment.jersey().register(MultiPartFeature.class);
-		environment.jersey().register(new FileResource(db));
-	}
-
-	protected DB configureMongoDB(FileRepositoryConfiguration configuration, Environment environment)
-			throws UnknownHostException {
-		ManagedMongoClient mongoClient = configuration.getMongo().build();
-		environment.lifecycle().manage(mongoClient);
-		DB db = mongoClient.getDB(configuration.getMongo().getDbName());
-		environment.healthChecks().register("mongoDB", new MongoHealthCheck(db));
-		return db;
+		environment.jersey().register(new FileResource(mongoBundle.getDb()));
 	}
 
 	protected void configureCORS(Environment environment) {
